@@ -25,7 +25,7 @@ Search the page for `PLACEHOLDER` to find every spot that still needs real conte
 
 - Navi's logo file
 - Real client reviews (only with the client's permission)
-- Navi's email address (`CONTACT_EMAIL` in the script at the bottom)
+- Navi's email for the Get in touch form (`CONTACT_EMAIL` in the script at the bottom)
 - The booking deposit (`DEPOSIT_AMOUNT`, now a $100 placeholder) and Navi's Stripe or Square payment link (`DEPOSIT_LINK`, now empty, so requests go by email)
 - Dates already taken (`BOOKED_DATES`), which show greyed out on the calendar
 - The hours in a half day and a full day

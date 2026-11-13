@@ -235,7 +235,8 @@ a.phone:hover,a.phone:focus-visible{box-shadow:0 0 0 1px var(--gold-solid),0 30p
 .c-slide .stars .off{color:#4a4a4a}
 .rev-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:44px}
 .rev-actions .btn{width:auto;padding:0 28px}
-.rev-form{max-width:780px;margin-top:28px}
+.rev-form{max-width:780px;margin-top:28px;scroll-margin-top:110px}
+#reviews{scroll-margin-top:40px}
 .rev-form[hidden]{display:none}
 .rev-form .h3{font-size:clamp(24px,2.2vw,32px);font-weight:700;text-transform:uppercase;line-height:1.1;margin-bottom:6px}
 .rate{border:0;margin:0 0 4px;padding:0;display:flex;align-items:center;gap:16px;flex-wrap:wrap;min-width:0}
@@ -1632,10 +1633,13 @@ var REVIEWS_URL = "";      /* Days already taken, like ["2026-12-06", "2026-12-1
         send = d.getElementById('revSend'), starLabels = rf.querySelectorAll('.stars-in label'), radios = rf.querySelectorAll('.stars-in input');
     function show(on, focus){
       rf.hidden = !on; open.setAttribute('aria-expanded', on);
-      if (on) { rf.scrollIntoView({behavior: 'smooth', block: 'start'}); if (focus) radios[0].focus({preventScroll: true}); }
+      if (on && focus) { rf.scrollIntoView({behavior: 'smooth', block: 'start'}); radios[0].focus({preventScroll: true}); }
     }
     open.addEventListener('click', function(){ show(rf.hidden, true); });
     if (location.hash === '#leave-review') show(true, false);
+    /* links like reviews.html -> #leave-review: land on the spot again once the reels and images above have loaded */
+    function toHash(){ var t = location.hash.length > 1 && d.getElementById(location.hash.slice(1)); if (t) t.scrollIntoView({block: 'start'}); }
+    window.addEventListener('load', function(){ toHash(); setTimeout(toHash, 900); });
     function paint(n){ starLabels.forEach(function(l, i){ l.classList.toggle('on', i < n); }); }
     function picked(){ var v = 0; radios.forEach(function(r){ if (r.checked) v = +r.value; }); return v; }
     radios.forEach(function(r){ r.addEventListener('change', function(){ paint(picked()); }); });

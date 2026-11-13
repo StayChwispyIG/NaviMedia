@@ -1,11 +1,13 @@
-# Navi Media / NaviTv website
+# NAVI Media website
 
-Draft one-page website for NaviTv (Navi Media), built by Chwispy Studio.
+Draft one-page website for NAVI Media, built by Chwispy Studio.
 
 ## Files
 
 - `index.html`: the main page (same as `navitv.html`), so GitHub Pages can serve it later.
-- `navitv.html`: the current draft, with five Instagram reels, stills from Navi's reels in the monthly content section, and the booking calendar.
+- `navitv.html`: the current draft, with the NAVI MEDIA logo in the header and footer, five Instagram reels, stills from Navi's reels in the monthly content section, and the booking calendar.
+- `navitv-v8-before-logo.html`: backup from before the logo and the NAVI Media name.
+- `navi-media-logo.webp`: Navi's logo with the black background taken out (the page carries its own copy, so it stays one file).
 - `navitv-v7-jotform.html`: the version with a Jotform booking form instead of the calendar, kept as a backup.
 - `navitv-v6.html`: backup with the built-in booking calendar and five reels, before the reel stills and Jotform.
 - `navitv-v5.html`: backup with the booking calendar and two reels.
@@ -23,7 +25,6 @@ Clients pick a date, package and place, and the request button opens their own e
 
 Search the page for `PLACEHOLDER` to find every spot that still needs real content:
 
-- Navi's logo file
 - Real client reviews (only with the client's permission)
 - The booking deposit (`DEPOSIT_AMOUNT`, now a $100 placeholder) and Navi's Stripe or Square payment link (`DEPOSIT_LINK`, now empty, so requests go by email)
 - Dates already taken (`BOOKED_DATES`), which show greyed out on the calendar

@@ -17,7 +17,7 @@ Draft one-page website for NaviTv (Navi Media), built by Chwispy Studio.
 
 ## Booking calendar
 
-Clients pick a date, package and place, and the request button opens their own email app with everything filled in, addressed to Navi (`BOOKING_EMAIL` in the script at the bottom).
+Clients pick a date, package and place, and the request button opens their own email app with everything filled in, addressed to Navi (`BOOKING_EMAIL` in the script at the bottom). The Get in touch form and email links use `CONTACT_EMAIL`, also set to Navi's email.
 
 ## Still to fill
 
@@ -25,7 +25,6 @@ Search the page for `PLACEHOLDER` to find every spot that still needs real conte
 
 - Navi's logo file
 - Real client reviews (only with the client's permission)
-- Navi's email for the Get in touch form (`CONTACT_EMAIL` in the script at the bottom)
 - The booking deposit (`DEPOSIT_AMOUNT`, now a $100 placeholder) and Navi's Stripe or Square payment link (`DEPOSIT_LINK`, now empty, so requests go by email)
 - Dates already taken (`BOOKED_DATES`), which show greyed out on the calendar
 - The hours in a half day and a full day

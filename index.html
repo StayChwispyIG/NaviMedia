@@ -88,7 +88,7 @@ h1,h2,h3,p{margin:0}
 .overlay{position:fixed;inset:0;z-index:55;background:#121212;display:flex;flex-direction:column;justify-content:center;padding:120px var(--pad) 60px;opacity:0;visibility:hidden;transition:opacity .45s var(--ease),visibility 0s linear .45s}
 .menu-open .overlay{opacity:1;visibility:visible;transition:opacity .45s var(--ease)}
 .overlay nav{display:flex;flex-direction:column;align-items:center;gap:0;text-align:center}
-.overlay nav a{font-size:clamp(44px,7.5vw,104px);font-weight:700;text-transform:uppercase;line-height:1.08;color:var(--text);-webkit-text-stroke:1.5px transparent;transition:color .25s,-webkit-text-stroke-color .25s}
+.overlay nav a{font-size:min(clamp(44px,7.5vw,104px),8.4vh);font-weight:700;text-transform:uppercase;line-height:1.08;color:var(--text);-webkit-text-stroke:1.5px transparent;transition:color .25s,-webkit-text-stroke-color .25s}
 .overlay nav a:hover,.overlay nav a:focus-visible,.overlay nav a.cur{color:transparent;-webkit-text-stroke-color:var(--text)}
 .overlay nav a.cur{-webkit-text-stroke-color:var(--gold-solid)}
 .overlay .ov-foot{margin-top:48px;display:flex;justify-content:center;gap:28px;flex-wrap:wrap;font-size:15px;color:var(--dim)}
@@ -229,6 +229,25 @@ a.phone:hover,a.phone:focus-visible{box-shadow:0 0 0 1px var(--gold-solid),0 30p
 .c-dots{display:flex;gap:8px}
 .c-dots button{width:14px;height:14px;border-radius:50%;background:#5b5b5b;transition:background .25s}
 .c-dots button[aria-current="true"]{background:var(--text)}
+.c-arrows[hidden],.c-dots[hidden]{display:none}
+.c-slide .quote{white-space:pre-line}
+.c-slide .stars{font-size:18px;letter-spacing:.2em;color:var(--gold-solid);margin-bottom:18px}
+.c-slide .stars .off{color:#4a4a4a}
+.rev-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:44px}
+.rev-actions .btn{width:auto;padding:0 28px}
+.rev-form{max-width:780px;margin-top:28px}
+.rev-form[hidden]{display:none}
+.rev-form .h3{font-size:clamp(24px,2.2vw,32px);font-weight:700;text-transform:uppercase;line-height:1.1;margin-bottom:6px}
+.rate{border:0;margin:0 0 4px;padding:0;display:flex;align-items:center;gap:16px;flex-wrap:wrap;min-width:0}
+.rate-label{font-size:15px;color:var(--dim)}
+.stars-in{display:flex;gap:2px}
+.stars-in input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.stars-in label{font-size:32px;line-height:1;padding:2px 3px;color:#4a4a4a;cursor:pointer;transition:color .15s;border-radius:6px}
+.stars-in label.on{color:var(--gold-solid)}
+.stars-in input:focus-visible+label{outline:2px solid var(--gold-solid);outline-offset:2px}
+.form .code-in{letter-spacing:.45em;font-weight:700}
+.form .code-in::placeholder{letter-spacing:normal;font-weight:400}
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
 
 .clients{padding:20px 0 clamp(80px,9vw,140px)}
 .clients .eyebrow{text-align:center;margin-bottom:34px}
@@ -576,6 +595,7 @@ a.phone:hover,a.phone:focus-visible{box-shadow:0 0 0 1px var(--gold-solid),0 30p
     <a href="#work">Work</a>
     <a href="#services">Services</a>
     <a href="#process">Process</a>
+    <a href="#reviews">Reviews</a>
     <a href="#pricing">Pricing</a>
     <a href="#book">Book</a>
     <a href="#faq">FAQ</a>
@@ -778,7 +798,8 @@ a.phone:hover,a.phone:focus-visible{box-shadow:0 0 0 1px var(--gold-solid),0 30p
 </section>
 
 <!-- ================= REVIEWS =================
-     PLACEHOLDER: only real reviews, with the client's permission. Delete unused slides. -->
+     Approved reviews from the "NAVI Media Reviews" Google Sheet replace these three placeholder slides
+     once REVIEWS_URL is set in the script at the bottom. Until then the placeholders show. -->
 <section class="band" aria-hidden="true">
   <div class="marquee">
     <div class="track">
@@ -787,7 +808,7 @@ a.phone:hover,a.phone:focus-visible{box-shadow:0 0 0 1px var(--gold-solid),0 30p
     </div>
   </div>
 </section>
-<section class="reviews" aria-labelledby="rev-h">
+<section class="reviews" id="reviews" aria-labelledby="rev-h">
   <div class="wrap">
     <h2 class="h2 g rv" id="rev-h">Clients say.</h2>
     <div class="carousel rv d1" aria-roledescription="carousel" aria-label="Client reviews">
@@ -819,6 +840,37 @@ a.phone:hover,a.phone:focus-visible{box-shadow:0 0 0 1px var(--gold-solid),0 30p
       </div>
       <div class="c-dots" id="cDots"></div>
     </div>
+    <div class="rev-actions">
+      <button class="btn btn-glow" type="button" id="revOpen" aria-expanded="false" aria-controls="leave-review"><svg class="ico" aria-hidden="true"><use href="#i-msg"/></svg>Leave a review</button>
+      <a class="btn btn-line" href="reviews.html">See all reviews</a>
+    </div>
+
+    <!-- Leave a review. Sends to the Google Sheet. The 4-digit code is checked inside Google, not here. -->
+    <form class="form rev-form" id="leave-review" hidden novalidate>
+      <p class="h3">Leave a review</p>
+      <fieldset class="rate">
+        <legend class="sr">Your rating</legend>
+        <span class="rate-label" aria-hidden="true">Your rating</span>
+        <span class="stars-in" id="rateStars">
+          <input type="radio" name="rating" id="rate1" value="1"><label for="rate1"><span class="sr">1 star</span><span aria-hidden="true">★</span></label>
+          <input type="radio" name="rating" id="rate2" value="2"><label for="rate2"><span class="sr">2 stars</span><span aria-hidden="true">★</span></label>
+          <input type="radio" name="rating" id="rate3" value="3"><label for="rate3"><span class="sr">3 stars</span><span aria-hidden="true">★</span></label>
+          <input type="radio" name="rating" id="rate4" value="4"><label for="rate4"><span class="sr">4 stars</span><span aria-hidden="true">★</span></label>
+          <input type="radio" name="rating" id="rate5" value="5"><label for="rate5"><span class="sr">5 stars</span><span aria-hidden="true">★</span></label>
+        </span>
+      </fieldset>
+      <div class="two">
+        <label><span class="sr">Your name</span><input name="name" placeholder="Your name" autocomplete="name" maxlength="60" required></label>
+        <label><span class="sr">Business or bike (optional)</span><input name="business" placeholder="Business or bike (optional)" maxlength="80"></label>
+      </div>
+      <label><span class="sr">Headline (optional)</span><input name="headline" placeholder="Headline (optional)" maxlength="90"></label>
+      <label><span class="sr">Your review</span><textarea name="review" placeholder="How was your shoot with Navi?" maxlength="1200" required></textarea></label>
+      <label><span class="sr">4-digit review code</span><input class="code-in" name="code" placeholder="4-digit code from Navi" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="off" required></label>
+      <label class="hp" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label>
+      <button class="btn btn-glow" type="submit" id="revSend">Send review</button>
+      <p class="form-note">Navi gives you the code after your shoot. Your review shows here once it's approved.</p>
+      <p class="form-msg" id="revMsg" role="status"></p>
+    </form>
   </div>
 </section>
 
@@ -1211,6 +1263,7 @@ a.phone:hover,a.phone:focus-visible{box-shadow:0 0 0 1px var(--gold-solid),0 30p
             <li><a href="#work">Work</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#process">Process</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
             <li><a href="#pricing">Pricing</a></li>
             <li><a href="#book">Book</a></li>
             <li><a href="#faq">FAQ</a></li>
@@ -1234,7 +1287,12 @@ var BOOKING_EMAIL = "Srjefe7@gmail.com"; /* Booking requests from the calendar o
 /* ===== PLACEHOLDER: booking settings ===== */
 var DEPOSIT_AMOUNT = 100;   /* PLACEHOLDER: the deposit in dollars. Navi sets the real number. */
 var DEPOSIT_LINK = "";      /* PLACEHOLDER: paste Navi's Stripe or Square payment link here (starts with https://). Empty = clients email the request and Navi replies with a deposit link. */
-var BOOKED_DATES = [];      /* Days already taken, like ["2026-12-06", "2026-12-13"]. They show greyed out. */
+var BOOKED_DATES = [];
+
+/* ===== Reviews =====
+   The web app address from the "NAVI Media Reviews" Google Sheet (Extensions > Apps Script > Deploy).
+   It starts with https://script.google.com/macros/s/ and ends with /exec. Empty = placeholder reviews show. */
+var REVIEWS_URL = "";      /* Days already taken, like ["2026-12-06", "2026-12-13"]. They show greyed out. */
 
 (function(){
   var d = document, root = d.documentElement;
@@ -1506,14 +1564,20 @@ var BOOKED_DATES = [];      /* Days already taken, like ["2026-12-06", "2026-12-
 
   /* reviews carousel */
   var track = d.getElementById('cTrack'), slides = track.children, dots = d.getElementById('cDots'), cur = 0;
-  for (var i = 0; i < slides.length; i++) {
-    (function(n){
-      var b = d.createElement('button');
-      b.setAttribute('aria-label', 'Show review ' + (n + 1) + ' of ' + slides.length);
-      b.addEventListener('click', function(){ go(n); });
-      dots.appendChild(b);
-    })(i);
+  var cArrows = d.querySelector('.c-arrows');
+  function setupDots(){
+    dots.innerHTML = '';
+    for (var i = 0; i < slides.length; i++) {
+      (function(n){
+        var b = d.createElement('button');
+        b.setAttribute('aria-label', 'Show review ' + (n + 1) + ' of ' + slides.length);
+        b.addEventListener('click', function(){ go(n); });
+        dots.appendChild(b);
+      })(i);
+    }
+    cArrows.hidden = dots.hidden = slides.length < 2;
   }
+  setupDots();
   function go(n){
     cur = (n + slides.length) % slides.length;
     track.style.transform = 'translateX(' + (-100 * cur) + '%)';
@@ -1523,6 +1587,90 @@ var BOOKED_DATES = [];      /* Days already taken, like ["2026-12-06", "2026-12-
   d.getElementById('cPrev').addEventListener('click', function(){ go(cur - 1); });
   d.getElementById('cNext').addEventListener('click', function(){ go(cur + 1); });
   go(0);
+
+  /* approved reviews from the Google Sheet */
+  function el(tag, cls, text){ var x = d.createElement(tag); if (cls) x.className = cls; if (text != null) x.textContent = text; return x; }
+  function starsEl(n){
+    var p = el('p', 'stars'); p.setAttribute('role', 'img'); p.setAttribute('aria-label', n + ' out of 5 stars');
+    for (var i = 0; i < 5; i++) { var sp = el('span', i < n ? '' : 'off', '★'); sp.setAttribute('aria-hidden', 'true'); p.appendChild(sp); }
+    return p;
+  }
+  function slideEl(r, i, total){
+    var s = el('div', 'c-slide');
+    s.setAttribute('role', 'group'); s.setAttribute('aria-roledescription', 'slide'); s.setAttribute('aria-label', (i + 1) + ' of ' + total);
+    if (r.rating) s.appendChild(starsEl(r.rating));
+    if (r.headline) s.appendChild(el('p', 'title', '“' + r.headline + '”'));
+    s.appendChild(el('p', 'quote', r.review));
+    if (r.name) s.appendChild(el('p', 'who', r.name));
+    if (r.role) s.appendChild(el('p', 'role', r.role));
+    return s;
+  }
+  function fillReviews(list, failed){
+    track.innerHTML = '';
+    if (!list.length) {
+      list = [failed
+        ? {headline: 'Reviews are taking a moment.', review: 'See them all on the reviews page.'}
+        : {headline: 'No reviews yet.', review: 'Worked with Navi? Be the first to leave one.'}];
+    } else {
+      list = list.slice(0, 6).map(function(r){
+        return {rating: r.rating, headline: r.headline, review: r.review, name: r.name,
+                role: (r.business ? r.business + ' · ' : '') + 'Verified client'};
+      });
+    }
+    list.forEach(function(r, i){ track.appendChild(slideEl(r, i, list.length)); });
+    setupDots(); go(0);
+  }
+  if (REVIEWS_URL && window.fetch) {
+    fetch(REVIEWS_URL).then(function(r){ return r.json(); })
+      .then(function(j){ fillReviews((j && j.reviews) || [], false); })
+      .catch(function(){ fillReviews([], true); });
+  }
+
+  /* leave a review */
+  (function(){
+    var open = d.getElementById('revOpen'), rf = d.getElementById('leave-review'), rmsg = d.getElementById('revMsg'),
+        send = d.getElementById('revSend'), starLabels = rf.querySelectorAll('.stars-in label'), radios = rf.querySelectorAll('.stars-in input');
+    function show(on, focus){
+      rf.hidden = !on; open.setAttribute('aria-expanded', on);
+      if (on) { rf.scrollIntoView({behavior: 'smooth', block: 'start'}); if (focus) radios[0].focus({preventScroll: true}); }
+    }
+    open.addEventListener('click', function(){ show(rf.hidden, true); });
+    if (location.hash === '#leave-review') show(true, false);
+    function paint(n){ starLabels.forEach(function(l, i){ l.classList.toggle('on', i < n); }); }
+    function picked(){ var v = 0; radios.forEach(function(r){ if (r.checked) v = +r.value; }); return v; }
+    radios.forEach(function(r){ r.addEventListener('change', function(){ paint(picked()); }); });
+    starLabels.forEach(function(l, i){
+      l.addEventListener('mouseenter', function(){ paint(i + 1); });
+      l.addEventListener('mouseleave', function(){ paint(picked()); });
+    });
+    var codeIn = rf.elements.code;
+    codeIn.addEventListener('input', function(){ codeIn.value = codeIn.value.replace(/\D/g, '').slice(0, 4); });
+
+    var ERR = {
+      code: "That code doesn't match. Check the 4-digit code Navi gave you.",
+      locked: 'Too many wrong codes. Please try again in an hour.',
+      busy: 'Reviews are paused for today. Please try again tomorrow.',
+      invalid: 'Please add a star rating, your name and a few words.'
+    };
+    rf.addEventListener('submit', function(e){
+      e.preventDefault();
+      var f = rf.elements, rating = picked();
+      var data = {rating: rating, name: f.name.value.trim(), business: f.business.value.trim(),
+                  headline: f.headline.value.trim(), review: f.review.value.trim(), code: f.code.value.trim(), website: f.website.value};
+      if (!rating || !data.name || data.review.length < 10) { rmsg.textContent = ERR.invalid; return; }
+      if (!/^\d{4}$/.test(data.code)) { rmsg.textContent = 'Please enter the 4-digit code Navi gave you.'; return; }
+      if (!REVIEWS_URL || !window.fetch) { rmsg.textContent = "Reviews aren't switched on yet. Please check back soon."; return; }
+      send.disabled = true; rmsg.textContent = 'Sending...';
+      fetch(REVIEWS_URL, {method: 'POST', headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify(data)})
+        .then(function(r){ return r.json(); })
+        .then(function(j){
+          if (j && j.ok) { rf.reset(); paint(0); rmsg.textContent = "Thanks! Your review is in. It shows here once it's approved."; }
+          else { rmsg.textContent = ERR[(j && j.error)] || ERR.invalid; }
+        })
+        .catch(function(){ rmsg.textContent = "Couldn't send your review. Check your connection and try again."; })
+        .then(function(){ send.disabled = false; });
+    });
+  })();
 
   /* inquiry form -> email */
   var form = d.getElementById('form'), msg = d.getElementById('formMsg');

@@ -107,6 +107,23 @@ body.menu-open{overflow:hidden}
 .screen{max-width:1040px;margin:0 auto;border-radius:22px;padding:12px;background:#0c0c0c;box-shadow:0 0 0 1px #2c2c2c,0 40px 90px rgba(0,0,0,.55)}
 .screen .slot{aspect-ratio:16/9;border-radius:12px}
 .reel-rule{height:1px;background:var(--line);margin-top:120px}
+/* instagram reels (official embed, loads near view; fallback link if it can't) */
+.reel-feature{max-width:420px;margin:0 auto;text-align:left}
+.reels-more{margin-top:clamp(40px,5vw,64px)}
+.reels-more .eyebrow{margin-bottom:18px}
+.reels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;align-items:start;text-align:left}
+.reels .ig{padding:8px;border-radius:18px}
+.ig{border-radius:22px;padding:10px;background:#0c0c0c;box-shadow:0 0 0 1px #2c2c2c,0 40px 90px rgba(0,0,0,.55);min-width:0}
+.ig .instagram-media{margin:0!important;min-width:0!important;width:100%!important;max-width:100%!important;border-radius:14px!important}
+.ig blockquote.instagram-media{padding:0;border:0;background:none}
+.ig-poster{position:relative;display:grid;place-items:center;text-align:center;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:radial-gradient(120% 90% at 30% 20%,#3a3120 0%,#1f1d18 45%,#151515 100%);color:var(--text)}
+.ig-poster .lbl{font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:0 18px}
+.ig-poster .lbl small{display:block;margin-top:6px;font-size:12px;font-weight:400;letter-spacing:.02em;text-transform:none;color:#a39168}
+.ig-poster .tag{position:absolute;top:14px;left:14px;display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#d6d6d6;background:rgba(0,0,0,.45);padding:6px 12px;border-radius:99px}
+.ig-poster .tag .ico{font-size:14px}
+.ig-poster:hover .play,.ig-poster:focus-visible .play{background:rgba(217,179,79,.18)}
+.work-item.wide{grid-column:1/-1;aspect-ratio:16/9}
+.work-item.wide .thumb{background-size:cover}
 
 /* media slots */
 .slot{position:relative;overflow:hidden;background:radial-gradient(120% 90% at 30% 20%,#3a3120 0%,#1f1d18 45%,#151515 100%);display:grid;place-items:center;text-align:center;color:#a39168}
@@ -297,6 +314,85 @@ body.menu-open{overflow:hidden}
 .single-band b{font-size:clamp(36px,5vw,72px);font-weight:700;text-transform:uppercase;line-height:1}
 .single-band .ico{font-size:clamp(30px,4vw,56px);stroke-width:1.6}
 
+/* ================= BOOKING (easy booking calendar) ================= */
+[hidden]{display:none!important}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero-cta .btn{width:auto;margin-top:0;padding:0 28px}
+.book{padding:clamp(80px,9vw,140px) 0;border-top:1px solid var(--line)}
+.book-head{max-width:760px;margin-bottom:clamp(40px,5vw,64px)}
+.book-head .h2{margin:16px 0 22px}
+.book-head p{color:var(--dim);font-size:clamp(17px,1.4vw,20px);font-weight:300}
+.book-grid{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:clamp(24px,4vw,56px);align-items:start}
+.book-steps{display:grid;gap:18px;min-width:0}
+.bstep{margin:0;min-width:0;border:1px solid var(--line);border-radius:18px;padding:clamp(20px,2.6vw,32px);background:#1d1d1d}
+.bstep legend{float:left;width:100%;padding:0;display:flex;align-items:center;gap:14px;font-size:clamp(20px,1.8vw,24px);font-weight:600;line-height:1.2;margin-bottom:20px}
+.bstep legend+*{clear:both}
+.n{flex:none;font-size:12px;font-weight:600;letter-spacing:.2em;color:var(--gold-solid);border:1px solid rgba(217,179,79,.5);border-radius:99px;padding:4px 9px;line-height:1.2}
+.cal{max-width:460px}
+.cal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.cal-head b{font-size:18px;font-weight:600}
+.cal-head .c-arrow:disabled{opacity:.3;cursor:default;background:none;border-color:#6a6a6a}
+.cal-dow,.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.cal-dow span{text-align:center;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--dimmer);padding-bottom:4px}
+.day{aspect-ratio:1/1;border-radius:12px;font-size:15px;color:var(--text);background:#262626;transition:background .2s,color .2s,box-shadow .2s}
+.day:hover:not(:disabled){background:#353535}
+.day:focus-visible{outline:2px solid var(--gold-solid);outline-offset:2px}
+.day:disabled{background:none;color:#4a4a4a;cursor:not-allowed}
+.day.booked{text-decoration:line-through}
+.day.today{box-shadow:inset 0 0 0 1px #6a6a6a}
+.day[aria-pressed="true"]{background:var(--gold);background-size:200% auto;color:#111;font-weight:700;box-shadow:0 0 18px rgba(217,179,79,.45)}
+.bhint{margin-top:14px;font-size:14px;color:var(--dimmer)}
+.opt-label{font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--dimmer);margin:0 0 10px}
+.opt-group+.opt-group{margin-top:20px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
+.opt,.pick{position:relative;display:block;cursor:pointer}
+.opt input,.pick input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.opt span{display:block;height:100%;padding:14px 16px;border:1px solid #3a3a3a;border-radius:14px;transition:border-color .2s,background .2s}
+.opt b{display:block;font-size:16px;font-weight:600;line-height:1.3}
+.opt small{display:block;margin-top:4px;font-size:14px;color:var(--dim)}
+.opt:hover span,.pick:hover span{border-color:#6a6a6a}
+.opt input:checked+span{border-color:var(--gold-solid);background:rgba(217,179,79,.09)}
+.opt input:checked+span small{color:var(--gold-solid)}
+.opt input:focus-visible+span,.pick input:focus-visible+span{outline:2px solid var(--gold-solid);outline-offset:2px}
+.picks{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.pick span{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1px solid #3a3a3a;border-radius:99px;font-size:15px;color:#d6d6d6;transition:background .2s,border-color .2s,color .2s}
+.pick input:checked+span{background:var(--gold-solid);border-color:var(--gold-solid);color:#111;font-weight:600}
+.bfields{display:grid;gap:12px}
+.bfields .two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.bfield{display:block}
+.bfield input,.bfield textarea{width:100%;font:inherit;font-size:16px;color:#111;background-color:#f2f2f2;border:1px solid #f2f2f2;border-radius:99px;padding:15px 22px;outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
+.bfield textarea{border-radius:20px;min-height:110px;resize:vertical}
+.bfield input::placeholder,.bfield textarea::placeholder{color:#777}
+.bfield input:focus,.bfield textarea:focus{border-color:var(--gold-solid);box-shadow:0 0 0 3px rgba(217,179,79,.35)}
+.book-sum{position:sticky;top:96px}
+.sum-card,.book-done{border:1px solid rgba(217,179,79,.35);background:linear-gradient(165deg,#1d1d1d 0%,#211e17 45%,#3b2f12 82%,#4d3b11 100%)}
+.sum-card{border-radius:20px;padding:clamp(22px,2.6vw,32px)}
+.sum-card .eyebrow{display:flex;align-items:center;gap:12px;color:var(--text);margin-bottom:16px}
+.sumlist div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 0;border-top:1px solid var(--line);font-size:15px}
+.sumlist dt{color:var(--dim);flex:none}
+.sumlist dd{margin:0;text-align:right;color:var(--text);font-weight:500;overflow-wrap:anywhere}
+.sumlist dd.empty{color:var(--dimmer);font-weight:400}
+.dep{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:18px 0 4px;border-top:1px solid var(--line)}
+.dep span{font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase}
+.dep b{font-size:46px;font-weight:700;line-height:1}
+.dep-note{font-size:13px;color:#c9c9c9}
+.sum-card .btn-glow{margin-top:18px}
+.pay-note{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;font-size:13px;color:#bdbdbd;text-align:center}
+.pay-note .ico{font-size:14px;flex:none}
+.sum-card .form-msg{margin-top:12px;text-align:center}
+.book-done{max-width:640px;margin:0 auto;text-align:center;border-radius:22px;padding:clamp(28px,4vw,52px)}
+.book-done:focus{outline:none}
+.done-mark{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;background:var(--gold);color:#111;box-shadow:0 0 30px rgba(217,179,79,.5)}
+.done-mark .ico{font-size:32px;stroke-width:2.4}
+.book-done h3{font-size:clamp(34px,4vw,56px);font-weight:700;text-transform:uppercase;line-height:1;margin:12px 0 16px}
+.book-done>p{color:#d6d6d6;max-width:500px;margin-inline:auto}
+.book-done .sumlist{max-width:440px;margin:24px auto 0;text-align:left}
+.done-actions{display:grid;gap:10px;max-width:360px;margin:26px auto 0}
+.done-actions .btn-glow{margin-top:0}
+.linkbtn{margin-top:18px;font-size:14px;color:var(--dim);text-decoration:underline;text-underline-offset:3px}
+.linkbtn:hover{color:var(--text)}
+.book-done .tag{margin-top:24px;font-size:12px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-solid)}
+
 /* ================= FAQ ================= */
 .faq{padding:clamp(90px,10vw,160px) 0}
 .faq .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(30px,5vw,80px);align-items:start}
@@ -369,6 +465,9 @@ body.menu-open{overflow:hidden}
   .faq-left{position:static}
   .foot-top{grid-template-columns:minmax(0,1fr)}
 }
+@media (max-width:991px) and (min-width:768px){
+  .reels{grid-template-columns:repeat(2,minmax(0,1fr));max-width:720px;margin-inline:auto}
+}
 /* ================= PHONE ================= */
 @media (max-width:767px){
   body{font-size:16px}
@@ -377,6 +476,12 @@ body.menu-open{overflow:hidden}
   .hero{padding:120px 0 70px}
   .reel{padding:10px 0 0}
   .reel-rule{margin-top:80px}
+  .reel-feature{max-width:none}
+  /* phones: the four extra reels become a sideways swipe row */
+  .reels{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(-1*var(--pad));padding:0 var(--pad) 6px;scrollbar-width:none}
+  .reels::-webkit-scrollbar{display:none}
+  .reels .ig{flex:0 0 78%;scroll-snap-align:center}
+  .ig{padding:6px;border-radius:16px}
   .screen{padding:6px;border-radius:14px}
   .screen .slot{border-radius:9px}
   .play{width:56px;height:56px}
@@ -399,6 +504,16 @@ body.menu-open{overflow:hidden}
   .foot-cols{gap:28px}
   .foot-bottom{padding-bottom:60px}
   .float{padding:11px 18px;font-size:14px}
+  .bfields .two{grid-template-columns:minmax(0,1fr)}
+  .opts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cal-dow,.cal-grid{gap:4px}
+  .day{border-radius:9px;font-size:14px}
+  .bstep{padding:18px 14px}
+  .hero-cta .btn{flex:1 1 auto}
+}
+@media (max-width:991px){
+  .book-grid{grid-template-columns:minmax(0,1fr)}
+  .book-sum{position:static}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -433,6 +548,8 @@ body.menu-open{overflow:hidden}
   <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
   <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
   <symbol id="i-yt" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
 </svg>
 
@@ -448,6 +565,7 @@ body.menu-open{overflow:hidden}
     <a href="#services">Services</a>
     <a href="#process">Process</a>
     <a href="#pricing">Pricing</a>
+    <a href="#book">Book</a>
     <a href="#faq">FAQ</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -458,7 +576,7 @@ body.menu-open{overflow:hidden}
   </div>
 </div>
 
-<a href="#contact" class="float"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg>Book a shoot</a>
+<a href="#book" class="float"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg>Book a shoot</a>
 
 <main id="main">
 
@@ -468,6 +586,7 @@ body.menu-open{overflow:hidden}
     <div class="hero-left">
       <div class="eyebrow rv">Independent creator · Southern California</div>
       <p class="lead rv d1">Life on two wheels. Stories worth telling. NaviTv shoots and edits video and photo for brands, shops and events, based in the Inland Empire.</p>
+      <div class="hero-cta rv d2"><a href="#book" class="btn btn-glow"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg>Book a shoot</a><a href="#pricing" class="btn btn-line">See pricing</a></div>
     </div>
     <div class="hero-right">
       <div class="pill rv"><span class="dot" aria-hidden="true"></span>Rider · Filmmaker · Storyteller</div>
@@ -480,13 +599,43 @@ body.menu-open{overflow:hidden}
 <section class="reel" aria-label="Showreel">
   <div class="wrap">
     <h2 class="statement g rv">Here, we ride.</h2>
-    <div class="screen rv d1">
-      <!-- Latest film from Navi's YouTube channel. Loads the player only when pressed.
-           PLACEHOLDER: when Navi has a cut-down reel, swap data-yt for its video id (or use an MP4:
-           <video src="reel.mp4" autoplay muted loop playsinline></video>) -->
-      <button class="slot yt" type="button" data-yt="2hvs17iF-Ww" data-title="Bob’s Big Boy to El Diablo! | Tujunga Canyon Ride Out" style="--thumb:url(https://i.ytimg.com/vi/2hvs17iF-Ww/hqdefault.jpg)" aria-label="Play the film: Bob’s Big Boy to El Diablo, Tujunga Canyon Ride Out"><span class="lbl"><span class="play"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg></span>Bob’s Big Boy to El Diablo<small>Tujunga Canyon Ride Out</small></span></button>
+    <!-- Instagram reels, using Instagram's own embed (embed.js loads when this section is near).
+         First one is featured; the four below sit in a row (2x2 on tablets, a swipe row on phones).
+         If the embed can't load, each box stays a link to the reel on Instagram.
+         To swap a reel: change the reel code in both its data-instgrm-permalink and its href. -->
+    <div class="reel-feature">
+      <div class="ig rv d1">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DSlgC7uAfMT/?utm_source=ig_embed" data-instgrm-version="14">
+          <a class="ig-poster" href="https://www.instagram.com/reel/DSlgC7uAfMT/" target="_blank" rel="noopener" aria-label="Watch reel 1 on Instagram"><span class="tag"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg>Reel</span><span class="lbl"><span class="play"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg></span>Watch the reel<small>on Instagram</small></span></a>
+        </blockquote>
+      </div>
     </div>
-    <a class="more rv" href="https://www.youtube.com/@navitv7" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-yt"/></svg>All films on YouTube</a>
+    <div class="reels-more">
+      <div class="eyebrow rv">More reels</div>
+      <div class="reels">
+        <div class="ig rv">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DUXQlk9kQ6E/?utm_source=ig_embed" data-instgrm-version="14">
+            <a class="ig-poster" href="https://www.instagram.com/reel/DUXQlk9kQ6E/" target="_blank" rel="noopener" aria-label="Watch reel 2 on Instagram"><span class="tag"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg>Reel</span><span class="lbl"><span class="play"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg></span>Watch the reel<small>on Instagram</small></span></a>
+          </blockquote>
+        </div>
+        <div class="ig rv d1">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DUjaWeqElcV/?utm_source=ig_embed" data-instgrm-version="14">
+            <a class="ig-poster" href="https://www.instagram.com/reel/DUjaWeqElcV/" target="_blank" rel="noopener" aria-label="Watch reel 3 on Instagram"><span class="tag"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg>Reel</span><span class="lbl"><span class="play"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg></span>Watch the reel<small>on Instagram</small></span></a>
+          </blockquote>
+        </div>
+        <div class="ig rv d2">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DU06NLPDzZO/?utm_source=ig_embed" data-instgrm-version="14">
+            <a class="ig-poster" href="https://www.instagram.com/reel/DU06NLPDzZO/" target="_blank" rel="noopener" aria-label="Watch reel 4 on Instagram"><span class="tag"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg>Reel</span><span class="lbl"><span class="play"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg></span>Watch the reel<small>on Instagram</small></span></a>
+          </blockquote>
+        </div>
+        <div class="ig rv d3">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DWNFJCwAWv6/?utm_source=ig_embed" data-instgrm-version="14">
+            <a class="ig-poster" href="https://www.instagram.com/reel/DWNFJCwAWv6/" target="_blank" rel="noopener" aria-label="Watch reel 5 on Instagram"><span class="tag"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg>Reel</span><span class="lbl"><span class="play"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg></span>Watch the reel<small>on Instagram</small></span></a>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+    <a class="more rv" href="https://www.instagram.com/navitv_/" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg>More on Instagram @navitv_</a>
     <div class="reel-rule"></div>
   </div>
 </section>
@@ -536,7 +685,9 @@ body.menu-open{overflow:hidden}
   <div class="work">
     <div class="wrap work-grid">
       <!-- Films from Navi's YouTube channel (thumbnails load from YouTube).
-           PLACEHOLDER: swap for his own stills or muted clips if he prefers. -->
+           PLACEHOLDER: swap for his own stills or muted clips if he prefers.
+           The wide first one is his latest film and plays right here when pressed. -->
+      <div class="work-item wide rv"><button class="slot yt" type="button" data-yt="2hvs17iF-Ww" data-title="Bob’s Big Boy to El Diablo! | Tujunga Canyon Ride Out" style="--thumb:url(https://i.ytimg.com/vi/2hvs17iF-Ww/hqdefault.jpg)" aria-label="Play the film: Bob’s Big Boy to El Diablo, Tujunga Canyon Ride Out"><span class="lbl"><span class="play"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg></span>Latest film · Bob’s Big Boy to El Diablo<small>Tujunga Canyon Ride Out</small></span></button></div>
       <a class="work-item rv" href="https://www.youtube.com/watch?v=VwJzF0V6VLg" target="_blank" rel="noopener" aria-label="Watch on YouTube: My First Race on a Harley Road Glide! | Moto Beach Classic 2026"><div class="slot thumb" style="--thumb:url(https://i.ytimg.com/vi/VwJzF0V6VLg/hqdefault.jpg)"></div><span class="yt-mark" aria-hidden="true"><svg class="ico"><use href="#i-play"/></svg></span><span class="cap">Moto Beach Classic 2026 · First race</span></a>
       <a class="work-item rv d1" href="https://www.youtube.com/watch?v=Gbc7PAMUOa0" target="_blank" rel="noopener" aria-label="Watch on YouTube: 2025 Road Glide Brake Upgrade | SuperGear RF7 Caliper Install &amp; Riding Impressions"><div class="slot thumb" style="--thumb:url(https://i.ytimg.com/vi/Gbc7PAMUOa0/hqdefault.jpg)"></div><span class="yt-mark" aria-hidden="true"><svg class="ico"><use href="#i-play"/></svg></span><span class="cap">SuperGear Performance · Brake install</span></a>
       <a class="work-item rv" href="https://www.youtube.com/watch?v=8fAPeTswU-M" target="_blank" rel="noopener" aria-label="Watch on YouTube: Full Throttle Moto Big Bear Ride — We Broke the Bike"><div class="slot thumb" style="--thumb:url(https://i.ytimg.com/vi/8fAPeTswU-M/hqdefault.jpg)"></div><span class="yt-mark" aria-hidden="true"><svg class="ico"><use href="#i-play"/></svg></span><span class="cap">Full Throttle Moto · Big Bear ride</span></a>
@@ -690,7 +841,7 @@ body.menu-open{overflow:hidden}
       <p class="rv d1">I’m a U.S. Army veteran, motorcycle creator, and photographer based in the Inland Empire, California. The gold Road Glide is a big part of the story. So are the friends, shops, and riders I meet along the way.</p>
       <p class="rv d2">From a day with the crew at Full Throttle Moto to the next track session, I’m here to keep learning, bring people together, and tell the stories that deserve to be seen.</p>
       <p class="sig rv d3"><b>Eduardo “Navi” Navarro</b><small>Rider · Creator · U.S. Army veteran</small></p>
-      <p class="rv d3">Bookings go through the form below or a DM to <a href="https://www.instagram.com/navitv_/" target="_blank" rel="noopener"><strong>@navitv_</strong></a> on Instagram.</p>
+      <p class="rv d3">Bookings go through the <a href="#book"><strong>booking calendar</strong></a> below or a DM to <a href="https://www.instagram.com/navitv_/" target="_blank" rel="noopener"><strong>@navitv_</strong></a> on Instagram.</p>
     </div>
   </div>
 </section>
@@ -725,7 +876,7 @@ body.menu-open{overflow:hidden}
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Edited photos included</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>2 revision rounds</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>10–15 business day delivery</div>
-          <div class="btn-row"><a href="#contact" class="btn btn-line" data-pkg="Essential plan ($1,500/mo)">Start Essential</a></div>
+          <div class="btn-row"><a href="#book" class="btn btn-line" data-pkg="Essential plan ($1,500/mo)">Start Essential</a></div>
         </article>
         <article class="card">
           <div class="badge-row"><span class="badge">Monthly</span></div>
@@ -736,7 +887,7 @@ body.menu-open{overflow:hidden}
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Edited photos included</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>2 revision rounds</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>10–15 business day delivery</div>
-          <div class="btn-row"><a href="#contact" class="btn btn-line" data-pkg="Growth plan ($3,000/mo)">Start Growth</a></div>
+          <div class="btn-row"><a href="#book" class="btn btn-line" data-pkg="Growth plan ($3,000/mo)">Start Growth</a></div>
         </article>
         <article class="card feat">
           <div class="badge-row"><span class="badge">Monthly</span></div>
@@ -747,7 +898,7 @@ body.menu-open{overflow:hidden}
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Edited photos included</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>2 revision rounds</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>10–15 business day delivery</div>
-          <div class="btn-row"><a href="#contact" class="btn btn-line" data-pkg="Signature plan ($5,000/mo)">Start Signature</a></div>
+          <div class="btn-row"><a href="#book" class="btn btn-line" data-pkg="Signature plan ($5,000/mo)">Start Signature</a></div>
         </article>
       </div>
       <p class="pnote">Plans include 10 to 40 edited photos, depending on the plan.</p>
@@ -765,7 +916,7 @@ body.menu-open{overflow:hidden}
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>2 revision rounds</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>10–15 business day delivery</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Second shooter, drone and travel quoted</div>
-          <div class="btn-row"><a href="#contact" class="btn btn-line" data-pkg="Event coverage ($1,750)">Book event coverage</a></div>
+          <div class="btn-row"><a href="#book" class="btn btn-line" data-pkg="Event coverage ($1,750)">Book event coverage</a></div>
         </article>
         <article class="card">
           <div class="badge-row"><span class="badge">Production</span></div>
@@ -776,7 +927,7 @@ body.menu-open{overflow:hidden}
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>2 revision rounds</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>10–15 business day delivery</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Second shooter, drone and travel quoted</div>
-          <div class="btn-row"><a href="#contact" class="btn btn-line" data-pkg="Corporate interview ($2,000)">Book an interview</a></div>
+          <div class="btn-row"><a href="#book" class="btn btn-line" data-pkg="Corporate interview ($2,000)">Book an interview</a></div>
         </article>
         <article class="card">
           <div class="badge-row"><span class="badge">Production</span></div>
@@ -787,7 +938,7 @@ body.menu-open{overflow:hidden}
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>2 revision rounds</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>10–15 business day delivery</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Second shooter, drone and travel quoted</div>
-          <div class="btn-row"><a href="#contact" class="btn btn-line" data-pkg="Brand film ($5,000)">Start a brand film</a></div>
+          <div class="btn-row"><a href="#book" class="btn btn-line" data-pkg="Brand film ($5,000)">Start a brand film</a></div>
         </article>
         <article class="card feat">
           <div class="badge-row"><span class="badge">Production</span></div>
@@ -798,7 +949,7 @@ body.menu-open{overflow:hidden}
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>2 revision rounds</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>10–15 business day delivery</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Second shooter, drone and travel quoted</div>
-          <div class="btn-row"><a href="#contact" class="btn btn-line" data-pkg="Commercial campaign ($7,500+)">Plan a campaign</a></div>
+          <div class="btn-row"><a href="#book" class="btn btn-line" data-pkg="Commercial campaign ($7,500+)">Plan a campaign</a></div>
         </article>
       </div>
     </div>
@@ -817,7 +968,7 @@ body.menu-open{overflow:hidden}
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Editing $125 an hour</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Second shooter and drone quoted</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Travel quoted</div>
-          <div class="btn-row"><a href="#contact" class="btn btn-line" data-pkg="Half day ($900)">Book a half day</a></div>
+          <div class="btn-row"><a href="#book" class="btn btn-line" data-pkg="Half day ($900)">Book a half day</a></div>
         </article>
         <article class="card feat">
           <div class="badge-row"><span class="badge">Day rate</span></div>
@@ -829,7 +980,7 @@ body.menu-open{overflow:hidden}
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Editing $125 an hour</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Second shooter and drone quoted</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Travel quoted</div>
-          <div class="btn-row"><a href="#contact" class="btn btn-line" data-pkg="Full day ($1,600)">Book a full day</a></div>
+          <div class="btn-row"><a href="#book" class="btn btn-line" data-pkg="Full day ($1,600)">Book a full day</a></div>
         </article>
       </div>
     </div>
@@ -847,7 +998,7 @@ body.menu-open{overflow:hidden}
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Real estate</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Events</div>
           <div class="r li"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Weddings</div>
-          <div class="btn-row"><a href="#contact" class="btn btn-line" data-pkg="Photo shoot (quote)">Ask for a quote</a></div>
+          <div class="btn-row"><a href="#book" class="btn btn-line" data-pkg="Photo shoot (quote)">Ask for a quote</a></div>
         </article>
       </div>
     </div>
@@ -858,6 +1009,119 @@ body.menu-open{overflow:hidden}
     <a href="#pricing" class="single-band" id="toDayRates">
       <span class="wrap"><b>Day rates</b><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
     </a>
+  </div>
+</section>
+
+<!-- ================= BOOKING =================
+     Easy booking: date, package, place, details, deposit, confirmation.
+     Settings (deposit amount, payment link, booked dates) are at the top of the script at the bottom. -->
+<section class="book" id="book" aria-labelledby="book-h">
+  <div class="wrap">
+    <div class="book-head">
+      <div class="eyebrow rv">Easy booking</div>
+      <h2 class="h2 rv d1" id="book-h">Pick a date. <span class="g">Lock it in.</span></h2>
+      <p class="rv d2">Choose a day, a package and where we’re shooting. A small deposit holds your date.</p>
+    </div>
+    <form class="book-grid" id="bookForm" novalidate>
+      <div class="book-steps">
+        <fieldset class="bstep rv">
+          <legend><span class="n">01</span>Pick a date</legend>
+          <div class="cal">
+            <div class="cal-head">
+              <button type="button" class="c-arrow" id="calPrev" aria-label="Previous month"><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg></button>
+              <b id="calTitle" aria-live="polite">Month</b>
+              <button type="button" class="c-arrow" id="calNext" aria-label="Next month"><svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></button>
+            </div>
+            <div class="cal-dow" aria-hidden="true"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+            <div class="cal-grid" id="calGrid"></div>
+          </div>
+          <p class="bhint">Past days and days already booked are greyed out.</p>
+        </fieldset>
+        <fieldset class="bstep rv">
+          <legend><span class="n">02</span>Pick a package</legend>
+          <div>
+            <div class="opt-group">
+              <p class="opt-label">Single shoots</p>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="bpkg" value="Half day" data-price="$900" data-key="Half day ($900)"><span><b>Half day</b><small>$900 · up to 4 hours</small></span></label>
+                <label class="opt"><input type="radio" name="bpkg" value="Full day" data-price="$1,600" data-key="Full day ($1,600)"><span><b>Full day</b><small>$1,600 · up to 8 hours</small></span></label>
+                <label class="opt"><input type="radio" name="bpkg" value="Event coverage" data-price="$1,750" data-key="Event coverage ($1,750)"><span><b>Event coverage</b><small>$1,750</small></span></label>
+                <label class="opt"><input type="radio" name="bpkg" value="Corporate interview" data-price="$2,000" data-key="Corporate interview ($2,000)"><span><b>Corporate interview</b><small>$2,000</small></span></label>
+                <label class="opt"><input type="radio" name="bpkg" value="Brand film" data-price="$5,000" data-key="Brand film ($5,000)"><span><b>Brand film</b><small>$5,000</small></span></label>
+                <label class="opt"><input type="radio" name="bpkg" value="Commercial campaign" data-price="$7,500+" data-key="Commercial campaign ($7,500+)"><span><b>Commercial campaign</b><small>from $7,500</small></span></label>
+                <label class="opt"><input type="radio" name="bpkg" value="Photo shoot" data-price="Quoted" data-key="Photo shoot (quote)"><span><b>Photo shoot</b><small>quoted for you</small></span></label>
+              </div>
+            </div>
+            <div class="opt-group">
+              <p class="opt-label">Monthly content</p>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="bpkg" value="Essential plan" data-price="$1,500/mo" data-key="Essential plan ($1,500/mo)"><span><b>Essential plan</b><small>$1,500 a month</small></span></label>
+                <label class="opt"><input type="radio" name="bpkg" value="Growth plan" data-price="$3,000/mo" data-key="Growth plan ($3,000/mo)"><span><b>Growth plan</b><small>$3,000 a month</small></span></label>
+                <label class="opt"><input type="radio" name="bpkg" value="Signature plan" data-price="$5,000/mo" data-key="Signature plan ($5,000/mo)"><span><b>Signature plan</b><small>$5,000 a month</small></span></label>
+              </div>
+            </div>
+            <div class="opt-group">
+              <p class="opt-label">Still deciding</p>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="bpkg" value="Not sure yet" data-price="To talk through" data-key="Not sure yet"><span><b>Not sure yet</b><small>we’ll figure it out together</small></span></label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="bstep rv">
+          <legend><span class="n">03</span>Where’s the shoot?</legend>
+          <div>
+            <div class="picks">
+              <label class="pick"><input type="radio" name="barea" value="Inland Empire"><span>Inland Empire</span></label>
+              <label class="pick"><input type="radio" name="barea" value="Los Angeles"><span>Los Angeles</span></label>
+              <label class="pick"><input type="radio" name="barea" value="Orange County"><span>Orange County</span></label>
+              <label class="pick"><input type="radio" name="barea" value="Other"><span>Other</span></label>
+            </div>
+            <label class="bfield"><span class="sr">Address, venue or city</span><input name="bplace" placeholder="Address, venue or city" autocomplete="street-address"></label>
+          </div>
+        </fieldset>
+        <fieldset class="bstep rv">
+          <legend><span class="n">04</span>Your details</legend>
+          <div class="bfields">
+            <div class="two">
+              <label class="bfield"><span class="sr">Name</span><input name="bname" placeholder="Name" autocomplete="name"></label>
+              <label class="bfield"><span class="sr">Email</span><input name="bemail" type="email" placeholder="Email" autocomplete="email"></label>
+            </div>
+            <label class="bfield"><span class="sr">Phone (optional)</span><input name="bphone" type="tel" placeholder="Phone (optional)" autocomplete="tel"></label>
+            <label class="bfield"><span class="sr">Anything Navi should know</span><textarea name="bnotes" placeholder="Anything Navi should know? Start time, the bike, the brand, the vibe."></textarea></label>
+          </div>
+        </fieldset>
+      </div>
+      <aside class="book-sum" aria-labelledby="sum-h">
+        <div class="sum-card">
+          <p class="eyebrow" id="sum-h"><span class="n">05</span>Your booking</p>
+          <dl class="sumlist">
+            <div><dt>Date</dt><dd id="sDate" class="empty">Pick a date</dd></div>
+            <div><dt>Package</dt><dd id="sPkg" class="empty">Pick a package</dd></div>
+            <div><dt>Place</dt><dd id="sPlace" class="empty">Add a place</dd></div>
+            <div><dt>Price</dt><dd id="sPrice" class="empty">–</dd></div>
+          </dl>
+          <div class="dep"><span>Deposit today</span><b class="g" id="sDep">$100</b></div>
+          <p class="dep-note">The deposit holds your date. Navi confirms the final total with you.</p>
+          <button class="btn btn-glow" type="submit" id="bookBtn">Pay deposit &amp; book</button>
+          <p class="form-msg" id="bookMsg" role="status"></p>
+          <p class="pay-note" id="payNote"><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg><span>Secure checkout opens in a new tab.</span></p>
+        </div>
+      </aside>
+    </form>
+    <div class="book-done" id="bookDone" hidden tabindex="-1" aria-labelledby="doneH">
+      <div class="done-mark" aria-hidden="true"><svg class="ico"><use href="#i-check"/></svg></div>
+      <div class="eyebrow">You’re on the calendar</div>
+      <h3 id="doneH">You’re in!</h3>
+      <p id="doneMsg"></p>
+      <dl class="sumlist" id="doneSum"></dl>
+      <div class="done-actions">
+        <a class="btn btn-glow" id="donePay" href="#book" target="_blank" rel="noopener">Open the deposit page</a>
+        <a class="btn btn-line" id="doneMail" href="#book">Send Navi your details</a>
+      </div>
+      <button type="button" class="linkbtn" id="bookAgain">Book another date</button>
+      <p class="tag">Here, we ride.</p>
+    </div>
   </div>
 </section>
 
@@ -876,7 +1140,7 @@ body.menu-open{overflow:hidden}
       <details><summary>Do you travel?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Yes. Travel is quoted based on the location.</p></details>
       <details><summary>Can I add drone footage or a second shooter?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Yes. Both are quoted per project.</p></details>
       <details><summary>What photo shoots do you do?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Headshots, real estate, events and weddings. Each one is quoted.</p></details>
-      <details><summary>How do I book?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Send the form below or a DM to @navitv_ on Instagram.</p></details>
+      <details><summary>How do I book?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Pick a date, a package and a place in the booking calendar above, then pay a small deposit to hold the date. You can also send the form below or a DM to @navitv_ on Instagram.</p></details>
     </div>
   </div>
 </section>
@@ -937,6 +1201,7 @@ body.menu-open{overflow:hidden}
             <li><a href="#services">Services</a></li>
             <li><a href="#process">Process</a></li>
             <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#book">Book</a></li>
             <li><a href="#faq">FAQ</a></li>
           </ul>
         </div>
@@ -953,6 +1218,11 @@ body.menu-open{overflow:hidden}
 /* ===== PLACEHOLDER: Navi's real email ===== */
 var CONTACT_EMAIL = "your@email.com";
 
+/* ===== PLACEHOLDER: booking settings ===== */
+var DEPOSIT_AMOUNT = 100;   /* PLACEHOLDER: the deposit in dollars. Navi sets the real number. */
+var DEPOSIT_LINK = "";      /* PLACEHOLDER: paste Navi's Stripe or Square payment link here (starts with https://). Empty = clients email the request and Navi replies with a deposit link. */
+var BOOKED_DATES = [];      /* Days already taken, like ["2026-12-06", "2026-12-13"]. They show greyed out. */
+
 (function(){
   var d = document, root = d.documentElement;
   root.classList.add('js');
@@ -963,6 +1233,26 @@ var CONTACT_EMAIL = "your@email.com";
   ml.href = 'mailto:' + CONTACT_EMAIL;
   d.getElementById('mailText').textContent = CONTACT_EMAIL;
   d.querySelectorAll('.mail-js').forEach(function(a){ a.href = 'mailto:' + CONTACT_EMAIL; });
+
+  /* Instagram reels: load Instagram's embed script when the reels are near the screen */
+  (function(){
+    var boxes = d.querySelectorAll('.ig .instagram-media');
+    if (!boxes.length) return;
+    var done = false;
+    function load(){
+      if (done) return; done = true;
+      if (window.instgrm && window.instgrm.Embeds) { window.instgrm.Embeds.process(); return; }
+      var s = d.createElement('script');
+      s.async = true; s.src = 'https://www.instagram.com/embed.js';
+      d.body.appendChild(s);
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(es){
+        if (es.some(function(e){ return e.isIntersecting; })) { load(); io.disconnect(); }
+      }, { rootMargin: '600px 0px' });
+      boxes.forEach(function(b){ io.observe(b); });
+    } else { load(); }
+  })();
 
   /* click-to-play YouTube (player loads only when pressed) */
   d.querySelectorAll('.yt[data-yt]').forEach(function(b){
@@ -1059,6 +1349,145 @@ var CONTACT_EMAIL = "your@email.com";
       for (var i = 0; i < sel.options.length; i++) { if (sel.options[i].text === v) { sel.selectedIndex = i; break; } }
     });
   });
+
+  /* ===== easy booking ===== */
+  (function(){
+    var f = d.getElementById('bookForm'); if (!f) return;
+    var grid = d.getElementById('calGrid'), title = d.getElementById('calTitle'),
+        prev = d.getElementById('calPrev'), next = d.getElementById('calNext'),
+        msg = d.getElementById('bookMsg'), done = d.getElementById('bookDone');
+    var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'],
+        DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var now = new Date(), today = new Date(now.getFullYear(), now.getMonth(), now.getDate()),
+        firstView = new Date(today.getFullYear(), today.getMonth(), 1),
+        lastView = new Date(today.getFullYear(), today.getMonth() + 12, 1),
+        view = firstView, picked = null;
+    var live = /^https:\/\/[^\s]+$/.test(DEPOSIT_LINK);
+    var dep = '$' + Number(DEPOSIT_AMOUNT).toLocaleString('en-US');
+    function pad(n){ return (n < 10 ? '0' : '') + n; }
+    function iso(t){ return t.getFullYear() + '-' + pad(t.getMonth() + 1) + '-' + pad(t.getDate()); }
+    function nice(t){ return DAYS[t.getDay()] + ', ' + MONTHS[t.getMonth()] + ' ' + t.getDate() + ', ' + t.getFullYear(); }
+    function short(t){ return DAYS[t.getDay()].slice(0, 3) + ', ' + MONTHS[t.getMonth()].slice(0, 3) + ' ' + t.getDate(); }
+
+    d.getElementById('sDep').textContent = dep;
+    d.getElementById('bookBtn').textContent = live ? 'Pay ' + dep + ' deposit & book' : 'Request this date';
+    d.getElementById('payNote').lastElementChild.textContent = live
+      ? 'Secure checkout opens in a new tab.'
+      : 'Your email app opens with the details. Navi replies with a deposit link.';
+
+    function render(){
+      title.textContent = MONTHS[view.getMonth()] + ' ' + view.getFullYear();
+      prev.disabled = view <= firstView;
+      next.disabled = view >= lastView;
+      grid.innerHTML = '';
+      var lead = view.getDay(), count = new Date(view.getFullYear(), view.getMonth() + 1, 0).getDate();
+      for (var i = 0; i < lead; i++) grid.appendChild(d.createElement('span'));
+      for (var n = 1; n <= count; n++) {
+        var t = new Date(view.getFullYear(), view.getMonth(), n), key = iso(t), b = d.createElement('button');
+        var booked = BOOKED_DATES.indexOf(key) > -1, past = t < today;
+        b.type = 'button'; b.className = 'day'; b.textContent = n; b.setAttribute('data-date', key);
+        if (t.getTime() === today.getTime()) b.classList.add('today');
+        if (booked) b.classList.add('booked');
+        b.disabled = past || booked;
+        b.setAttribute('aria-label', nice(t) + (booked ? ', already booked' : past ? ', past' : ''));
+        b.setAttribute('aria-pressed', picked && iso(picked) === key ? 'true' : 'false');
+        grid.appendChild(b);
+      }
+    }
+    grid.addEventListener('click', function(e){
+      var b = e.target.closest('.day'); if (!b || b.disabled) return;
+      var p = b.getAttribute('data-date').split('-');
+      picked = new Date(+p[0], +p[1] - 1, +p[2]);
+      grid.querySelectorAll('.day').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      sum();
+    });
+    prev.addEventListener('click', function(){ if (view > firstView) { view = new Date(view.getFullYear(), view.getMonth() - 1, 1); render(); } });
+    next.addEventListener('click', function(){ if (view < lastView) { view = new Date(view.getFullYear(), view.getMonth() + 1, 1); render(); } });
+
+    function checked(name){ return f.querySelector('input[name="' + name + '"]:checked'); }
+    function place(){
+      var a = checked('barea'), t = f.elements['bplace'].value.trim(), parts = [];
+      if (a && a.value !== 'Other') parts.push(a.value);
+      if (t) parts.push(t);
+      return parts.join(' · ');
+    }
+    function setDD(id, v, empty){ var el = d.getElementById(id); el.textContent = v || empty; el.classList.toggle('empty', !v); }
+    function sum(){
+      var p = checked('bpkg');
+      setDD('sDate', picked ? short(picked) : '', 'Pick a date');
+      setDD('sPkg', p ? p.value : '', 'Pick a package');
+      setDD('sPlace', place(), 'Add a place');
+      setDD('sPrice', p ? p.getAttribute('data-price') : '', '–');
+      if (msg.textContent) msg.textContent = '';
+    }
+    f.addEventListener('change', sum);
+    f.elements['bplace'].addEventListener('input', sum);
+
+    /* pricing buttons pick the package here too */
+    d.querySelectorAll('[data-pkg]').forEach(function(a){
+      a.addEventListener('click', function(){
+        var k = a.getAttribute('data-pkg');
+        f.querySelectorAll('input[name="bpkg"]').forEach(function(r){ r.checked = r.getAttribute('data-key') === k; });
+        sum();
+      });
+    });
+
+    function list(a){ return a.length < 2 ? a[0] : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; }
+    function host(u){ var a = d.createElement('a'); a.href = u; return a.hostname; }
+
+    f.addEventListener('submit', function(e){
+      e.preventDefault();
+      var p = checked('bpkg'), name = f.elements['bname'].value.trim(), email = f.elements['bemail'].value.trim(), where = place(), miss = [];
+      if (!picked) miss.push('a date');
+      if (!p) miss.push('a package');
+      if (!where) miss.push('where the shoot is');
+      if (!name) miss.push('your name');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) miss.push('your email');
+      if (miss.length) { msg.textContent = 'Almost there. Add ' + list(miss) + '.'; return; }
+      msg.textContent = '';
+
+      var ref = 'NV-' + iso(picked).replace(/-/g, '') + '-' + Math.random().toString(36).slice(2, 6).toUpperCase();
+      var rows = [['Date', nice(picked)], ['Package', p.value + ' (' + p.getAttribute('data-price') + ')'], ['Place', where], ['Deposit', dep], ['Booking ref', ref]];
+      var body = ['Hi Navi, I’d like to book this shoot.', ''].concat(rows.map(function(r){ return r[0] + ': ' + r[1]; }), [
+        'Name: ' + name, 'Email: ' + email, 'Phone: ' + (f.elements['bphone'].value.trim() || '-'), 'Notes: ' + (f.elements['bnotes'].value.trim() || '-')]).join('\n');
+      var mail = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('Booking request: ' + short(picked) + ', ' + p.value) + '&body=' + encodeURIComponent(body);
+
+      var pay = '';
+      if (live) {
+        pay = DEPOSIT_LINK;
+        if (/(^|\.)stripe\.com$/.test(host(pay))) pay += (pay.indexOf('?') > -1 ? '&' : '?') + 'prefilled_email=' + encodeURIComponent(email) + '&client_reference_id=' + ref;
+        window.open(pay, '_blank', 'noopener');
+      } else {
+        window.location.href = mail;
+      }
+
+      var first = name.split(/\s+/)[0], what = p.value === 'Not sure yet' ? 'shoot' : p.value.toLowerCase();
+      d.getElementById('doneH').textContent = 'You’re in, ' + first + '!';
+      d.getElementById('doneMsg').textContent = live
+        ? nice(picked) + ' is penciled in for your ' + what + '. Finish the ' + dep + ' deposit in the tab that just opened and the date is yours. Then send Navi your details so the planning can start.'
+        : nice(picked) + ' is penciled in for your ' + what + '. Your email app just opened with everything filled in. Hit send, and Navi will reply with a ' + dep + ' deposit link to lock the date in.';
+      var dl = d.getElementById('doneSum'); dl.innerHTML = '';
+      rows.forEach(function(r){
+        var w = d.createElement('div'), dt = d.createElement('dt'), dd = d.createElement('dd');
+        dt.textContent = r[0]; dd.textContent = r[1]; w.appendChild(dt); w.appendChild(dd); dl.appendChild(w);
+      });
+      var dp = d.getElementById('donePay'), dm = d.getElementById('doneMail');
+      dp.hidden = !live; if (live) dp.href = pay;
+      dm.href = mail;
+      dm.textContent = live ? 'Send Navi your details' : 'Open the email again';
+      dm.className = live ? 'btn btn-line' : 'btn btn-glow';
+      f.hidden = true; done.hidden = false;
+      done.focus({preventScroll: true});
+      d.getElementById('book').scrollIntoView({behavior: 'smooth', block: 'start'});
+    });
+
+    d.getElementById('bookAgain').addEventListener('click', function(){
+      f.reset(); picked = null; view = firstView; render(); sum();
+      done.hidden = true; f.hidden = false;
+    });
+
+    render(); sum();
+  })();
 
   /* reviews carousel */
   var track = d.getElementById('cTrack'), slides = track.children, dots = d.getElementById('cDots'), cur = 0;

@@ -324,19 +324,6 @@ a.phone:hover,a.phone:focus-visible{box-shadow:0 0 0 1px var(--gold-solid),0 30p
 .book-head{max-width:760px;margin-bottom:clamp(40px,5vw,64px)}
 .book-head .h2{margin:16px 0 22px}
 .book-head p{color:var(--dim);font-size:clamp(17px,1.4vw,20px);font-weight:300}
-/* Jotform booking */
-.jf-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:clamp(24px,4vw,56px);align-items:start}
-.jf-card{border:1px solid var(--line);border-radius:20px;background:#151515;padding:clamp(8px,1.5vw,16px);overflow:hidden}
-.jf-card iframe{display:block;width:100%;min-width:100%;height:2050px;border:0;background:transparent}
-.jf-fallback{margin:10px 8px 4px;font-size:14px;color:var(--dim);text-align:center}
-.jf-fallback a{color:var(--gold-solid);text-decoration:underline;text-underline-offset:3px}
-.jf-next{position:sticky;top:100px}
-.jf-steps{list-style:none;margin:0;padding:0;display:grid;gap:16px}
-.jf-steps li{display:flex;gap:14px;align-items:baseline;font-size:16px;line-height:1.5}
-.jf-steps .n{color:var(--gold-solid);font-weight:600;font-size:13px;letter-spacing:.12em}
-.jf-next .tag{margin-top:24px;font-size:12px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-solid)}
-@media (max-width:991px){.jf-grid{grid-template-columns:1fr}.jf-next{position:static}}
-@media (max-width:767px){.jf-card iframe{height:2400px}}
 .book-grid{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:clamp(24px,4vw,56px);align-items:start}
 .book-steps{display:grid;gap:18px;min-width:0}
 .bstep{margin:0;min-width:0;border:1px solid var(--line);border-radius:18px;padding:clamp(20px,2.6vw,32px);background:#1d1d1d}
@@ -856,7 +843,7 @@ a.phone:hover,a.phone:focus-visible{box-shadow:0 0 0 1px var(--gold-solid),0 30p
       <p class="rv d1">I’m a U.S. Army veteran, motorcycle creator, and photographer based in the Inland Empire, California. The gold Road Glide is a big part of the story. So are the friends, shops, and riders I meet along the way.</p>
       <p class="rv d2">From a day with the crew at Full Throttle Moto to the next track session, I’m here to keep learning, bring people together, and tell the stories that deserve to be seen.</p>
       <p class="sig rv d3"><b>Eduardo “Navi” Navarro</b><small>Rider · Creator · U.S. Army veteran</small></p>
-      <p class="rv d3">Bookings go through the <a href="#book"><strong>booking form</strong></a> below or a DM to <a href="https://www.instagram.com/navitv_/" target="_blank" rel="noopener"><strong>@navitv_</strong></a> on Instagram.</p>
+      <p class="rv d3">Bookings go through the <a href="#book"><strong>booking calendar</strong></a> below or a DM to <a href="https://www.instagram.com/navitv_/" target="_blank" rel="noopener"><strong>@navitv_</strong></a> on Instagram.</p>
     </div>
   </div>
 </section>
@@ -1028,30 +1015,114 @@ a.phone:hover,a.phone:focus-visible{box-shadow:0 0 0 1px var(--gold-solid),0 30p
 </section>
 
 <!-- ================= BOOKING =================
-     Easy booking: a Jotform form. Requests are emailed straight to Navi. -->
+     Easy booking: date, package, place, details, deposit, confirmation.
+     Settings (deposit amount, payment link, booked dates) are at the top of the script at the bottom. -->
 <section class="book" id="book" aria-labelledby="book-h">
   <div class="wrap">
     <div class="book-head">
       <div class="eyebrow rv">Easy booking</div>
       <h2 class="h2 rv d1" id="book-h">Pick a date. <span class="g">Lock it in.</span></h2>
-      <p class="rv d2">Choose a day, a package and where we’re shooting. Navi gets your request right away and gets back to you to lock it in.</p>
+      <p class="rv d2">Choose a day, a package and where we’re shooting. A small deposit holds your date.</p>
     </div>
-    <!-- Booking form runs on Jotform. Every request is emailed straight to Navi.
-         Edit the questions or the email it goes to in Jotform, not here. -->
-    <div class="jf-grid">
-      <div class="jf-card rv">
-        <iframe id="JotFormIFrame-263159239859069" title="Book NaviTv" src="https://form.jotform.com/263159239859069" allow="fullscreen" scrolling="no" loading="lazy"></iframe>
-        <p class="jf-fallback">Form not loading? <a href="https://form.jotform.com/263159239859069" target="_blank" rel="noopener">Open it in a new tab</a>.</p>
+    <form class="book-grid" id="bookForm" novalidate>
+      <div class="book-steps">
+        <fieldset class="bstep rv">
+          <legend><span class="n">01</span>Pick a date</legend>
+          <div class="cal">
+            <div class="cal-head">
+              <button type="button" class="c-arrow" id="calPrev" aria-label="Previous month"><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg></button>
+              <b id="calTitle" aria-live="polite">Month</b>
+              <button type="button" class="c-arrow" id="calNext" aria-label="Next month"><svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></button>
+            </div>
+            <div class="cal-dow" aria-hidden="true"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+            <div class="cal-grid" id="calGrid"></div>
+          </div>
+          <p class="bhint">Past days and days already booked are greyed out.</p>
+        </fieldset>
+        <fieldset class="bstep rv">
+          <legend><span class="n">02</span>Pick a package</legend>
+          <div>
+            <div class="opt-group">
+              <p class="opt-label">Single shoots</p>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="bpkg" value="Half day" data-price="$900" data-key="Half day ($900)"><span><b>Half day</b><small>$900 · up to 4 hours</small></span></label>
+                <label class="opt"><input type="radio" name="bpkg" value="Full day" data-price="$1,600" data-key="Full day ($1,600)"><span><b>Full day</b><small>$1,600 · up to 8 hours</small></span></label>
+                <label class="opt"><input type="radio" name="bpkg" value="Event coverage" data-price="$1,750" data-key="Event coverage ($1,750)"><span><b>Event coverage</b><small>$1,750</small></span></label>
+                <label class="opt"><input type="radio" name="bpkg" value="Corporate interview" data-price="$2,000" data-key="Corporate interview ($2,000)"><span><b>Corporate interview</b><small>$2,000</small></span></label>
+                <label class="opt"><input type="radio" name="bpkg" value="Brand film" data-price="$5,000" data-key="Brand film ($5,000)"><span><b>Brand film</b><small>$5,000</small></span></label>
+                <label class="opt"><input type="radio" name="bpkg" value="Commercial campaign" data-price="$7,500+" data-key="Commercial campaign ($7,500+)"><span><b>Commercial campaign</b><small>from $7,500</small></span></label>
+                <label class="opt"><input type="radio" name="bpkg" value="Photo shoot" data-price="Quoted" data-key="Photo shoot (quote)"><span><b>Photo shoot</b><small>quoted for you</small></span></label>
+              </div>
+            </div>
+            <div class="opt-group">
+              <p class="opt-label">Monthly content</p>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="bpkg" value="Essential plan" data-price="$1,500/mo" data-key="Essential plan ($1,500/mo)"><span><b>Essential plan</b><small>$1,500 a month</small></span></label>
+                <label class="opt"><input type="radio" name="bpkg" value="Growth plan" data-price="$3,000/mo" data-key="Growth plan ($3,000/mo)"><span><b>Growth plan</b><small>$3,000 a month</small></span></label>
+                <label class="opt"><input type="radio" name="bpkg" value="Signature plan" data-price="$5,000/mo" data-key="Signature plan ($5,000/mo)"><span><b>Signature plan</b><small>$5,000 a month</small></span></label>
+              </div>
+            </div>
+            <div class="opt-group">
+              <p class="opt-label">Still deciding</p>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="bpkg" value="Not sure yet" data-price="To talk through" data-key="Not sure yet"><span><b>Not sure yet</b><small>we’ll figure it out together</small></span></label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="bstep rv">
+          <legend><span class="n">03</span>Where’s the shoot?</legend>
+          <div>
+            <div class="picks">
+              <label class="pick"><input type="radio" name="barea" value="Inland Empire"><span>Inland Empire</span></label>
+              <label class="pick"><input type="radio" name="barea" value="Los Angeles"><span>Los Angeles</span></label>
+              <label class="pick"><input type="radio" name="barea" value="Orange County"><span>Orange County</span></label>
+              <label class="pick"><input type="radio" name="barea" value="Other"><span>Other</span></label>
+            </div>
+            <label class="bfield"><span class="sr">Address, venue or city</span><input name="bplace" placeholder="Address, venue or city" autocomplete="street-address"></label>
+          </div>
+        </fieldset>
+        <fieldset class="bstep rv">
+          <legend><span class="n">04</span>Your details</legend>
+          <div class="bfields">
+            <div class="two">
+              <label class="bfield"><span class="sr">Name</span><input name="bname" placeholder="Name" autocomplete="name"></label>
+              <label class="bfield"><span class="sr">Email</span><input name="bemail" type="email" placeholder="Email" autocomplete="email"></label>
+            </div>
+            <label class="bfield"><span class="sr">Phone (optional)</span><input name="bphone" type="tel" placeholder="Phone (optional)" autocomplete="tel"></label>
+            <label class="bfield"><span class="sr">Anything Navi should know</span><textarea name="bnotes" placeholder="Anything Navi should know? Start time, the bike, the brand, the vibe."></textarea></label>
+          </div>
+        </fieldset>
       </div>
-      <aside class="sum-card jf-next rv d1" aria-labelledby="next-h">
-        <p class="eyebrow" id="next-h">What happens next</p>
-        <ol class="jf-steps">
-          <li><span class="n">01</span><span>Your request goes straight to Navi.</span></li>
-          <li><span class="n">02</span><span>Navi checks the date and confirms the total with you.</span></li>
-          <li><span class="n">03</span><span>A small deposit holds your date.</span></li>
-        </ol>
-        <p class="tag">Here, we ride.</p>
+      <aside class="book-sum" aria-labelledby="sum-h">
+        <div class="sum-card">
+          <p class="eyebrow" id="sum-h"><span class="n">05</span>Your booking</p>
+          <dl class="sumlist">
+            <div><dt>Date</dt><dd id="sDate" class="empty">Pick a date</dd></div>
+            <div><dt>Package</dt><dd id="sPkg" class="empty">Pick a package</dd></div>
+            <div><dt>Place</dt><dd id="sPlace" class="empty">Add a place</dd></div>
+            <div><dt>Price</dt><dd id="sPrice" class="empty">–</dd></div>
+          </dl>
+          <div class="dep"><span>Deposit today</span><b class="g" id="sDep">$100</b></div>
+          <p class="dep-note">The deposit holds your date. Navi confirms the final total with you.</p>
+          <button class="btn btn-glow" type="submit" id="bookBtn">Pay deposit &amp; book</button>
+          <p class="form-msg" id="bookMsg" role="status"></p>
+          <p class="pay-note" id="payNote"><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg><span>Secure checkout opens in a new tab.</span></p>
+        </div>
       </aside>
+    </form>
+    <div class="book-done" id="bookDone" hidden tabindex="-1" aria-labelledby="doneH">
+      <div class="done-mark" aria-hidden="true"><svg class="ico"><use href="#i-check"/></svg></div>
+      <div class="eyebrow">You’re on the calendar</div>
+      <h3 id="doneH">You’re in!</h3>
+      <p id="doneMsg"></p>
+      <dl class="sumlist" id="doneSum"></dl>
+      <div class="done-actions">
+        <a class="btn btn-glow" id="donePay" href="#book" target="_blank" rel="noopener">Open the deposit page</a>
+        <a class="btn btn-line" id="doneMail" href="#book">Send Navi your details</a>
+      </div>
+      <button type="button" class="linkbtn" id="bookAgain">Book another date</button>
+      <p class="tag">Here, we ride.</p>
     </div>
   </div>
 </section>
@@ -1071,7 +1142,7 @@ a.phone:hover,a.phone:focus-visible{box-shadow:0 0 0 1px var(--gold-solid),0 30p
       <details><summary>Do you travel?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Yes. Travel is quoted based on the location.</p></details>
       <details><summary>Can I add drone footage or a second shooter?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Yes. Both are quoted per project.</p></details>
       <details><summary>What photo shoots do you do?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Headshots, real estate, events and weddings. Each one is quoted.</p></details>
-      <details><summary>How do I book?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Pick a date, a package and a place in the booking form above. Navi gets your request and confirms the date with you, and a small deposit holds it. You can also send the form below or a DM to @navitv_ on Instagram.</p></details>
+      <details><summary>How do I book?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Pick a date, a package and a place in the booking calendar above, then pay a small deposit to hold the date. You can also send the form below or a DM to @navitv_ on Instagram.</p></details>
     </div>
   </div>
 </section>
@@ -1148,6 +1219,7 @@ a.phone:hover,a.phone:focus-visible{box-shadow:0 0 0 1px var(--gold-solid),0 30p
 <script>
 /* ===== PLACEHOLDER: Navi's real email ===== */
 var CONTACT_EMAIL = "your@email.com";
+var BOOKING_EMAIL = "Srjefe7@gmail.com"; /* Booking requests from the calendar open the visitor's email app addressed here. */
 
 /* ===== PLACEHOLDER: booking settings ===== */
 var DEPOSIT_AMOUNT = 100;   /* PLACEHOLDER: the deposit in dollars. Navi sets the real number. */
@@ -1381,7 +1453,7 @@ var BOOKED_DATES = [];      /* Days already taken, like ["2026-12-06", "2026-12-
       var rows = [['Date', nice(picked)], ['Package', p.value + ' (' + p.getAttribute('data-price') + ')'], ['Place', where], ['Deposit', dep], ['Booking ref', ref]];
       var body = ['Hi Navi, I’d like to book this shoot.', ''].concat(rows.map(function(r){ return r[0] + ': ' + r[1]; }), [
         'Name: ' + name, 'Email: ' + email, 'Phone: ' + (f.elements['bphone'].value.trim() || '-'), 'Notes: ' + (f.elements['bnotes'].value.trim() || '-')]).join('\n');
-      var mail = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('Booking request: ' + short(picked) + ', ' + p.value) + '&body=' + encodeURIComponent(body);
+      var mail = 'mailto:' + BOOKING_EMAIL + '?subject=' + encodeURIComponent('Booking request: ' + short(picked) + ', ' + p.value) + '&body=' + encodeURIComponent(body);
 
       var pay = '';
       if (live) {
@@ -1463,7 +1535,5 @@ var BOOKED_DATES = [];      /* Days already taken, like ["2026-12-06", "2026-12-
   });
 })();
 </script>
-<script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js" defer></script>
-<script>window.addEventListener('load',function(){if(window.jotformEmbedHandler)window.jotformEmbedHandler("iframe[id='JotFormIFrame-263159239859069']","https://form.jotform.com/")});</script>
 </body>
 </html>

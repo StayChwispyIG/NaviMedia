@@ -1159,8 +1159,7 @@ a.phone:hover,a.phone:focus-visible{box-shadow:0 0 0 1px var(--gold-solid),0 30p
     <div class="foot-top">
       <div>
         <h2 class="h2 g rv">Get in touch</h2>
-        <!-- Navi's email. Set CONTACT_EMAIL in the script at the bottom; this link updates from it. -->
-        <a class="mail rv d1" id="mailLink" href="mailto:Srjefe7@gmail.com"><span id="mailText">Srjefe7@gmail.com</span></a>
+        <!-- The address isn't printed here on purpose. The form sends to CONTACT_EMAIL in the script at the bottom. -->
         <form class="form rv d2" id="form" novalidate>
           <div class="two">
             <label><span class="sr">Name</span><input name="name" placeholder="Name" autocomplete="name" required></label>
@@ -1223,7 +1222,7 @@ a.phone:hover,a.phone:focus-visible{box-shadow:0 0 0 1px var(--gold-solid),0 30p
 
 <script>
 /* ===== PLACEHOLDER: Navi's real email ===== */
-var CONTACT_EMAIL = "Srjefe7@gmail.com"; /* Get in touch form, email link and footer email. */
+var CONTACT_EMAIL = "Srjefe7@gmail.com"; /* Get in touch form and the "Email" links. Not shown as text on the page. */
 var BOOKING_EMAIL = "Srjefe7@gmail.com"; /* Booking requests from the calendar open the visitor's email app addressed here. */
 
 /* ===== PLACEHOLDER: booking settings ===== */
@@ -1237,9 +1236,6 @@ var BOOKED_DATES = [];      /* Days already taken, like ["2026-12-06", "2026-12-
   d.getElementById('yr').textContent = new Date().getFullYear();
 
   /* email links */
-  var ml = d.getElementById('mailLink');
-  ml.href = 'mailto:' + CONTACT_EMAIL;
-  d.getElementById('mailText').textContent = CONTACT_EMAIL;
   d.querySelectorAll('.mail-js').forEach(function(a){ a.href = 'mailto:' + CONTACT_EMAIL; });
 
   /* Instagram reels: load Instagram's embed script when the reels are near the screen */
